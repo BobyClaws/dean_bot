@@ -9,7 +9,7 @@ const sqlite3 = require('sqlite3');
 const Gsearch = require('./commands/gsearch');
 const WelcomeUser = require('./commands/welcome_user');
 const UserAway = require('./commands/user_away');
-//const ReverseSearch = require('./commands/reverse_search');
+const ReverseSearch = require('./commands/reverse_search');
 const Plotting = require('./commands/plotting');
 
 /* import configs */

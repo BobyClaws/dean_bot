@@ -7,12 +7,14 @@ puppeteer.use(StealthPlugin())
 
 
 module.exports = function(rclient, msg) {
-    if(msg.content.startsWith('!rs ')) {
+    if(msg.content.startsWith('!reverse ')) {
 
-        
-        query = msg.content.slice(4);
-        let image_url = query;
+        let image_url = msg.content.slice(8);
 
+        // assume user is mentioned
+        if(msg.mentions.members.first()) {
+            image_url = msg.member.user.avatarURL()
+        }
 
 
         

@@ -1,0 +1,17 @@
+{
+  "name": "dean_bot",
+  "version": "0.0.1",
+  "description": "Dean, the discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "boby",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.4.1",
+    "redis": "^3.0.2",
+    "sqlite3": "^5.0.0",
+    "unirest": "^0.6.0"
+  }
+}

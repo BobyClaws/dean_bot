@@ -12,12 +12,10 @@ module.exports = function(rclient, msg) {
         let image_url = msg.content.slice(8);
 
         // assume user is mentioned
-        if(msg.mentions.members.first()) {
-            image_url = msg.member.user.avatarURL()
-        }
+        if(msg.mentions.members.first())
+            image_url = msg.mentions.members.first().user.avatarURL()
 
 
-        
         (async () => {
             
             const browser = await puppeteer.launch({

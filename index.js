@@ -14,6 +14,7 @@ const Plotting = require('./commands/plotting');
 
 /* import configs */
 const config = require('./config');
+const muteMember = require('./commands/mute_member');
 
 /* instances */
 const dclient = new Discord.Client();
@@ -49,7 +50,8 @@ dclient.on('message', async msg => {
         Plotting(rclient, msg);
         // reverse image search command
         ReverseSearch(rclient, msg);
-       
+       // mute command
+       muteMember(msg);
     }
 
     // afk command

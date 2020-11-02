@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 
-module.exports = function(rclient, msg) {
+module.exports = (rclient, msg) => {
 
 
 

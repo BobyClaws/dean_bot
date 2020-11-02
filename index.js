@@ -49,6 +49,7 @@ dclient.on('message', async msg => {
         plotting(rclient, msg);
         // reverse image search command
         reverseSearch(msg);
+        
        
     }
 

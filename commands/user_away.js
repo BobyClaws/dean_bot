@@ -1,4 +1,4 @@
-module.exports = (rclient, msg) => {
+module.exports = function UserAway(rclient, msg) {
 
 // trigger afk command
 if(msg.content.startsWith('afk on')) {

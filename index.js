@@ -50,8 +50,11 @@ dclient.on('message', async msg => {
         Plotting(rclient, msg);
         // reverse image search command
         ReverseSearch(rclient, msg);
-       // mute command
-       muteMember(msg);
+        // mute command
+        muteMember(msg);
+        reverseSearch(msg);
+        
+       
     }
 
     // afk command

@@ -6,11 +6,11 @@ const redis = require('redis');
 const sqlite3 = require('sqlite3');
 
 /* features */
-const Gsearch = require('./commands/gsearch');
-const WelcomeUser = require('./commands/welcome_user');
-const UserAway = require('./commands/user_away');
-const ReverseSearch = require('./commands/reverse_search');
-const Plotting = require('./commands/plotting');
+const gsearch = require('./commands/gsearch');
+const welcomeUser = require('./commands/welcome_user');
+const userAway = require('./commands/user_away');
+const reverseSearch = require('./commands/reverse_search');
+const plotting = require('./commands/plotting');
 
 /* import configs */
 const config = require('./config');
@@ -34,7 +34,7 @@ dclient.on('ready', () => {
 dclient.on('guildMemberAdd', (member) => {
     console.log('new user joined the server..');
     // welcome message
-    WelcomeUser(dclient, member);
+    welcomeUser(dclient, member);
 });
 
 
@@ -44,16 +44,16 @@ dclient.on('message', async msg => {
     // only allowed inside #deans-cave
     if(msg.channel.name == 'deans-cave') {
         // google search command        
-        Gsearch(msg);
+        gsearch(msg);
         // graphing command
-        Plotting(rclient, msg);
+        plotting(rclient, msg);
         // reverse image search command
-        ReverseSearch(rclient, msg);
+        reverseSearch(msg);
        
     }
 
     // afk command
-    UserAway(rclient, msg);
+    userAway(rclient, msg);
     
 
 

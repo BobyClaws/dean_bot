@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-module.exports = function WelcomeUser(client, member) {
+module.exports = (client, member) => {
     console.log('new user joined');
     //et channel = client.channels.cache.get('770156894077059083'); // boby's channel id
     let channel = client.channels.cache.get('744209394358812726'); // general channel id

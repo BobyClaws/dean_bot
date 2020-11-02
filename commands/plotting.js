@@ -5,11 +5,11 @@ module.exports = function(rclient, msg) {
 
 
     // graphing #1
-    if(msg.content.startsWith('[')) {
+    if(msg.content.startsWith('plot [')) {
 
 
 
-        json = msg.content;
+        json = msg.content.slice(5);
 
         rclient.exists('plotting>input', (e,r) => {
             if (r == 1) {

@@ -6,7 +6,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
 
-module.exports = (msg) => {
+module.exports = function(rclient, msg) {
     if(msg.content.startsWith('!reverse ')) {
 
         let image_url = msg.content.slice(8);

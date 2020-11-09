@@ -5,9 +5,11 @@ const Discord = require('discord.js');
  * @param {Discord.GuildMember} member 
  */
 module.exports = function WelcomeUser(client, member) {
+    // TODO: grab channel from conf; guild automatically
     console.log('new user joined');
     if (member.guild.name == 'Weebs ● パブ') {
         let channel = client.channels.cache.get('744209394358812726'); // general channel id
+    
         const embed = new Discord.MessageEmbed()
             .setTitle('Welcome!')
             .setDescription(`welcome to ${member.guild.name}, <@${member.id}>.\nHope you enjoy your stay!`)

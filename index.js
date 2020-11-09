@@ -3,7 +3,6 @@
 /* 3-rd party libs */
 const Discord = require('discord.js');
 const redis = require('redis');
-const sqlite3 = require('sqlite3');
 
 /* features */
 const Gsearch = require('./commands/gsearch');
@@ -44,15 +43,19 @@ dclient.on('message', async msg => {
     // testing features
     // only allowed inside #deans-cave
     if(msg.channel.name == 'deans-cave') {
+        
         // google search command        
         Gsearch(msg);
-        // graphing command
+        
+        // Plotting command
         Plotting(rclient, msg);
+        
         // reverse image search command
-        ReverseSearch(rclient, msg);
+        ReverseSearch(msg);
+
         // mute command
-        muteMember(msg);
-        reverseSearch(msg);
+        muteMember(rclient, msg);
+      
         
        
     }

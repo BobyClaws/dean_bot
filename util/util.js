@@ -1,8 +1,8 @@
-const evenSpace = (text0) => {
+const evenSpace = (text) => {
     
     let prev = null;
     let result = '';
-    let text = text0.trim();
+    text = text.trim();
     
     for(let i = 0; i < text.length; i++) {
         letter = text[i];

@@ -5,6 +5,7 @@ const Discord = require('discord.js');
  * @param {Discord.GuildMember} member 
  */
 module.exports = function WelcomeUser(client, member) {
+    console.log('New user joined the server..');
     // TODO: grab channel from conf; guild automatically
     console.log('new user joined');
     if (member.guild.name == 'Weebs ● パブ') {

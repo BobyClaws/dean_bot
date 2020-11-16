@@ -13,7 +13,7 @@ module.exports = function WelcomeUser(client, member) {
     
         const embed = new Discord.MessageEmbed()
             .setTitle('Welcome!')
-            .setDescription(`welcome to ${member.guild.name}, <@${member.id}>.\nHope you enjoy your stay!`)
+            .setDescription(`welcome to ${member.guild.name}, ${member}.\nHope you enjoy your stay!`)
             .setImage('https://cdn.discordapp.com/attachments/744255255738318888/771421191147094056/welcome.gif')
             .setThumbnail(member.guild.iconURL())
             .setColor('#40ab40');

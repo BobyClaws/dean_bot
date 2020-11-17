@@ -41,25 +41,33 @@ module.exports = (msg) => {
             page.setViewport({ width: 1000, height: 2000 });
 
             let page_url =
-                'https://images.google.com/searchbyimage?image_url=' + image_url + '&hl=en-IN'
+                `https://images.google.com/searchbyimage?image_url=${image_url.trim()}&hl=en-IN`
                 // 'https://google.com'
 
             await page.goto(page_url);
 
             /* parse results */
 
-            const {best_match, results} = await page.evaluate(() =>  {
+            const {best_match, results} = await page.evaluate((page_url) =>  {
 
                 results = []
 
                 /* grab the search results */
+           
+                let g = null;
+
+                try {
+                    // g, is the first result
+                    g = document.querySelector('.normal-header').nextSibling
                 
-                // g, is the first result
-                g = document.querySelector('.normal-header').nextSibling
-            
+                } catch (e) {
+                    // no results found.. inform it as first result
+                    results.push({'title': 'no results', 'desc': `[Try manually](${page_url})`})
+                }
+
                 // strip all useless info, add to results list, fetch next result
                 // and repeat
-                while(true) {
+                while(g) {
             
                     let desc = g.textContent.split('›')
                     desc = desc[desc.length -1] // reduced to last item
@@ -80,9 +88,11 @@ module.exports = (msg) => {
                 let best_match = document.querySelector('#topstuff')
                     .textContent.split('Possible related search:')[1];
                 
+                if(best_match == undefined) best_match = 'no results'
+                
                 return {best_match, results}
                     
-            });
+            }, page_url);
 
             await browser.close();
 
@@ -96,7 +106,7 @@ module.exports = (msg) => {
         
 
             let embed = new Discord.MessageEmbed()
-            .setDescription(`results that include matching image: (${resultno+1}/${results.length}) \n\n` + reply)
+            .addField(`results that include matching image: (${resultno+1}/${results.length}) \n\n`, reply)
             .setThumbnail(image_url)
             .setColor('#40ab40');
 

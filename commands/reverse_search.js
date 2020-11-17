@@ -50,45 +50,47 @@ module.exports = (msg) => {
 
             const {best_match, results} = await page.evaluate((page_url) =>  {
 
-                results = []
+                let results = []
+                let best_match = ''
 
-                /* grab the search results */
-           
-                let g = null;
-
+                // report if any errors while scraping in catch block
                 try {
-                    // g, is the first result
-                    g = document.querySelector('.normal-header').nextSibling
-                
-                } catch (e) {
-                    // no results found.. inform it as first result
-                    results.push({'title': 'no results', 'desc': `[Try manually](${page_url})`})
-                }
 
-                // strip all useless info, add to results list, fetch next result
-                // and repeat
-                while(g) {
+                    /* grab the search results */
             
-                    let desc = g.textContent.split('›')
-                    desc = desc[desc.length -1] // reduced to last item
-                    desc = desc.split(' — ')[1] // reduced to text content
-                    title = g.querySelector('span').textContent;
+                    // g, is the first result
+                    let g = document.querySelector('.normal-header').nextSibling
                     
-                    results.push({"title": title, "desc": desc});
-                    
-                    g = g.nextSibling
+        
 
-                    if(g) {
-                        if(g.className == "g") continue;
-                        else break;
-                    } else break;
+                    // strip all useless info, add to results list, fetch next result
+                    // and repeat
+                    while(g) {
+                
+                        let desc = g.textContent.split('›')
+                        desc = desc[desc.length -1] // reduced to last item
+                        desc = desc.split(' — ')[1] // reduced to text content
+                        title = g.querySelector('span').textContent;
+                        
+                        results.push({"title": title, "desc": desc});
+                        
+                        g = g.nextSibling
+
+                        if(g) {
+                            if(g.className == "g") continue;
+                            else break;
+                        } else break;
+                    }
+                    
+                    // retrieve the google's 'possible related search' keywords
+                    best_match = document.querySelector('#topstuff')
+                        .textContent.split('Possible related search:')[1];
+                    
+                } catch(e) {
+                    best_match = 'no results'
+                    results.push({'title': 'no results or service down', 'desc': `[Try manually](${page_url})`})
                 }
                 
-                // retrieve the google's 'possible related search' keywords
-                let best_match = document.querySelector('#topstuff')
-                    .textContent.split('Possible related search:')[1];
-                
-                if(best_match == undefined) best_match = 'no results'
                 
                 return {best_match, results}
                     

@@ -53,12 +53,7 @@ dclient.on('message', async msg => {
     // only allowed inside #deans-cave
     // also ignore webhook messages
     if(msg.channel.name == 'deans-cave' && !msg.webhookID) {
-        // google search command        
-        Gsearch(msg);
-        // Plotting command
-        Plotting(rclient, msg);
-        // mute command
-        muteMember(rclient, msg);   
+
     }
 
 
@@ -69,6 +64,13 @@ dclient.on('message', async msg => {
         UserAway(rclient, msg);        
         // reverse image search command
         ReverseSearch(msg);
+        // google search command        
+        Gsearch(msg);
+        // Plotting command
+        Plotting(rclient, msg);
+        // mute command
+        muteMember(rclient, msg);   
+
     }
 
 

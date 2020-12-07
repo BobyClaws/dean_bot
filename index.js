@@ -17,6 +17,8 @@ const ReverseSearch = require('./commands/reverse_search');
 const Plotting = require('./commands/plotting');
 const muteMember = require('./commands/mute_member');
 const webhookSpeak = require('./commands/webhook_speak');
+//const bible = require('./commands/bible');
+const tts = require('./commands/tts');
 
 
 /* import configs */
@@ -38,6 +40,8 @@ dclient.on('ready', () => {
     console.log('logged in as ${client.user.tag}');
     // webhook speak
     webhookSpeak(dclient,rclient);
+    let channel = dclient.channels.cache.get('744209394358812726'); // general channel id
+    
 
 });
 
@@ -53,7 +57,8 @@ dclient.on('message', async msg => {
     // only allowed inside #deans-cave
     // also ignore webhook messages
     if(msg.channel.name == 'deans-cave' && !msg.webhookID) {
-
+//        bible(msg);
+        
     }
 
 
@@ -70,7 +75,8 @@ dclient.on('message', async msg => {
         Plotting(rclient, msg);
         // mute command
         muteMember(rclient, msg);   
-
+	// tts
+	tts(msg);
     }
 
 
@@ -79,3 +85,4 @@ dclient.on('message', async msg => {
 
 // login and start the client
 dclient.login(config.bot_token);
+
